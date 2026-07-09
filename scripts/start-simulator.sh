@@ -14,6 +14,15 @@ if ! command -v xcrun &>/dev/null; then
   exit 1
 fi
 
+# Ensure xcode-select points at the full Xcode app, not just CLT
+XCODE_PATH=$(xcode-select -p 2>/dev/null)
+if [[ "$XCODE_PATH" == *"CommandLineTools"* ]] || ! xcrun simctl list &>/dev/null; then
+  echo "xcode-select is pointing at Command Line Tools, not the full Xcode SDK." >&2
+  echo "Fix it with:" >&2
+  echo "  sudo xcode-select -s /Applications/Xcode.app/Contents/Developer" >&2
+  exit 1
+fi
+
 # Check if a simulator is already booted
 BOOTED=$(xcrun simctl list devices booted 2>/dev/null | grep -v "^==" | grep -v "^--" | grep "(Booted)" || true)
 if [[ -n "$BOOTED" ]]; then
