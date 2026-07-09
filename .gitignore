@@ -1,6 +1,9 @@
 node_modules/
+dist/
 mock-web-monorepo/.next/
+mock-web-monorepo/dist/
 mock-mobile-app/.expo/
 mock-mobile-app/.expo-export/
+mock-mobile-app/dist/
 *.log
 .DS_Store
