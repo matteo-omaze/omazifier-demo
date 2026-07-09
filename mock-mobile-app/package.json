@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "MARKET=${MARKET:-uk} expo start",
-    "ios": "bash -c 'export PATH=\"$(gem environment gemdir)/bin:$PATH\"; MARKET=${MARKET:-uk} expo run:ios'",
+    "ios": "bash -c 'export PATH=\"$(gem environment gemdir)/bin:$PATH\"; MARKET=${MARKET:-uk} expo run:ios --no-build-cache'",
     "android": "MARKET=${MARKET:-uk} expo run:android",
     "web": "MARKET=${MARKET:-uk} expo start --web",
     "typecheck": "tsc --noEmit",

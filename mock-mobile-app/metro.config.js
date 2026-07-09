@@ -22,12 +22,20 @@ const config = getDefaultConfig(projectRoot);
 config.watchFolders = [workspaceRoot, engineRoot];
 
 // Hoisted workspace node_modules first, then project-local. Never the engine's own
-// node_modules — that's what was causing the duplicate-React hooks error.
+// node_modules — that causes duplicate-React hooks errors.
 config.resolver.nodeModulesPaths = [
   path.resolve(workspaceRoot, "node_modules"),
   path.resolve(projectRoot, "node_modules"),
 ];
 config.resolver.unstable_enableSymlinks = true;
+
+// Pin React + React Native to a single physical path so no symlink traversal can
+// cause Metro to load a second copy. This is the canonical fix for the
+// "Invalid hook call / duplicate React" error in monorepo setups.
+config.resolver.extraNodeModules = {
+  react: path.resolve(workspaceRoot, "node_modules/react"),
+  "react-native": path.resolve(workspaceRoot, "node_modules/react-native"),
+};
 
 // PER-MARKET BUNDLE. MARKET env var selects which composition file the bundle includes.
 // Adding a market = drop omazifier/markets/<code>.ts, no code edits needed.
