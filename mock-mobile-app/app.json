@@ -7,7 +7,15 @@
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "jsEngine": "jsc",
-    "platforms": ["ios", "android"],
-    "splash": { "backgroundColor": "#221943" }
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "splash": {
+      "backgroundColor": "#221943"
+    },
+    "ios": {
+      "bundleIdentifier": "com.anonymous.omazifier-mobile"
+    }
   }
 }

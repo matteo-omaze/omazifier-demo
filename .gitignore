@@ -5,5 +5,7 @@ mock-web-monorepo/dist/
 mock-mobile-app/.expo/
 mock-mobile-app/.expo-export/
 mock-mobile-app/dist/
+mock-mobile-app/ios/
+mock-mobile-app/android/
 *.log
 .DS_Store
