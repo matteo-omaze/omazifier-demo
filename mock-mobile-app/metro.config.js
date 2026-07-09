@@ -1,11 +1,11 @@
-// Metro config so the app can consume the `omazifier` engine, which lives two levels up
-// (omazifier/ — the product; this app sits under omazifier/demo/). Mirrors a monorepo sharing
-// a package outside the app root.
+// Metro config so the app can consume the `omazifier` engine, which is a sibling of this
+// demo repo (omazifier/ sits next to omazifier-demo/). Mirrors a monorepo sharing a package
+// outside the app root, and is also linked via npm workspaces into the root node_modules.
 const { getDefaultConfig } = require("expo/metro-config");
 const path = require("path");
 
 const projectRoot = __dirname;
-const engineRoot = path.resolve(projectRoot, "../..");
+const engineRoot = path.resolve(projectRoot, "../../omazifier");
 
 const config = getDefaultConfig(projectRoot);
 
