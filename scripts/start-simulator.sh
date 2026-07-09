@@ -23,7 +23,10 @@ if [[ -n "$BOOTED" ]]; then
 fi
 
 # List available simulators (iOS only, available state)
-mapfile -t SIMULATORS < <(
+SIMULATORS=()
+while IFS= read -r line; do
+  SIMULATORS+=("$line")
+done < <(
   xcrun simctl list devices available 2>/dev/null \
     | grep -E "^\s+.+ \([0-9A-F-]{36}\) \(Shutdown\)" \
     | sed 's/^ *//' \
