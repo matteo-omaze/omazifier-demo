@@ -1,0 +1,10 @@
+{
+  "event": "house-open",
+  "market": "de",
+  "currency": "EUR",
+  "offers": [
+    { "id": "de-1", "entries": 15, "price": 1200, "wasPrice": 2400, "ribbon": "offerGrid.ribbon.twoForOne", "checkoutUrl": "https://omaze.de/cart/de-1?discount=HO1O1" },
+    { "id": "de-2", "entries": 40, "price": 3000, "wasPrice": null, "ribbon": "offerGrid.ribbon.mostPopular", "checkoutUrl": "https://omaze.de/cart/de-2?discount=HO1O2" },
+    { "id": "de-3", "entries": 85, "price": 6000, "wasPrice": null, "ribbon": "offerGrid.ribbon.bestValue", "checkoutUrl": "https://omaze.de/cart/de-3?discount=HO1O3" }
+  ]
+}

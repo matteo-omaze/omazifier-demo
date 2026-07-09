@@ -1,0 +1,10 @@
+{
+  "event": "house-open",
+  "market": "uk",
+  "currency": "GBP",
+  "offers": [
+    { "id": "uk-1", "entries": 15, "price": 1000, "wasPrice": 2000, "ribbon": "offerGrid.ribbon.twoForOne", "checkoutUrl": "https://omaze.co.uk/cart/uk-1?discount=HO1O1" },
+    { "id": "uk-2", "entries": 40, "price": 2500, "wasPrice": null, "ribbon": "offerGrid.ribbon.mostPopular", "checkoutUrl": "https://omaze.co.uk/cart/uk-2?discount=HO1O2" },
+    { "id": "uk-3", "entries": 85, "price": 5000, "wasPrice": null, "ribbon": "offerGrid.ribbon.bestValue", "checkoutUrl": "https://omaze.co.uk/cart/uk-3?discount=HO1O3" }
+  ]
+}

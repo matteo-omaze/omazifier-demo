@@ -1,0 +1,10 @@
+{
+  "name": "mock-bff-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Stand-in for bff-monorepo: serves per-market offers JSON, shaped like the real /offers endpoint.",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

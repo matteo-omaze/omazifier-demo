@@ -1,0 +1,13 @@
+{
+  "expo": {
+    "name": "omazifier-mobile",
+    "slug": "omazifier-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "jsEngine": "jsc",
+    "platforms": ["ios", "android"],
+    "splash": { "backgroundColor": "#221943" }
+  }
+}

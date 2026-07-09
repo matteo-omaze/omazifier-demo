@@ -1,0 +1,24 @@
+{
+  "name": "mock-web-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Stand-in for web-monorepo: a Next.js 15 app that composes per-market pages from omazifier composition files.",
+  "scripts": {
+    "dev": "MARKET=${MARKET:-uk} next dev -p 3000",
+    "build": "MARKET=${MARKET:-uk} next build",
+    "start": "MARKET=${MARKET:-uk} next start -p 3000"
+  },
+  "dependencies": {
+    "next": "^15.1.6",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "omazifier": "file:../..",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0"
+  }
+}

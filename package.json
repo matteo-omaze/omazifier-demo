@@ -1,0 +1,15 @@
+{
+  "name": "omazifier-demo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Throwaway pressure-test harness for the omazifier engine (which lives one level up).",
+  "workspaces": [
+    "mock-bff-monorepo",
+    "mock-web-monorepo"
+  ],
+  "scripts": {
+    "dev:bff": "npm --workspace mock-bff-monorepo run start",
+    "dev:web": "MARKET=${MARKET:-uk} npm --workspace mock-web-monorepo run dev",
+    "build:web": "MARKET=${MARKET:-uk} npm --workspace mock-web-monorepo run build"
+  }
+}
