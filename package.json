@@ -2,14 +2,18 @@
   "name": "omazifier-demo",
   "version": "0.1.0",
   "private": true,
-  "description": "Throwaway pressure-test harness for the omazifier engine (which lives one level up).",
+  "description": "Demo harness for the omazifier engine: mock BFF, mobile app, and web app per market.",
   "workspaces": [
     "mock-bff-monorepo",
+    "mock-mobile-app",
     "mock-web-monorepo"
   ],
   "scripts": {
+    "sim": "bash scripts/start-simulator.sh",
     "dev:bff": "npm --workspace mock-bff-monorepo run start",
-    "dev:web": "MARKET=${MARKET:-uk} npm --workspace mock-web-monorepo run dev",
-    "build:web": "MARKET=${MARKET:-uk} npm --workspace mock-web-monorepo run build"
+    "dev:mobile:uk": "MARKET=uk npm --workspace mock-mobile-app run ios",
+    "dev:mobile:de": "MARKET=de npm --workspace mock-mobile-app run android",
+    "dev:web:uk": "MARKET=uk npm --workspace mock-web-monorepo run dev",
+    "dev:web:de": "MARKET=de npm --workspace mock-web-monorepo run dev"
   }
 }

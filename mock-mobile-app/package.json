@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "expo": "^54.0.0",
-    "omazifier": "file:../..",
+    "omazifier": "file:../../omazifier",
     "react": "19.1.0",
     "react-native": "0.81.5",
     "zod": "^3.23.8"
