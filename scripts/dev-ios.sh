@@ -10,6 +10,7 @@ APP_DIR="$SCRIPT_DIR/../mock-mobile-app"
 case "$MARKET" in
   uk) PORT=8081 ;;
   de) PORT=8082 ;;
+  fr) PORT=8083 ;;
   *)  echo "Unknown market: $MARKET. Add a PORT entry for it in dev-ios.sh."; exit 1 ;;
 esac
 

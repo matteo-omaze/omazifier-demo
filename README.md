@@ -122,9 +122,10 @@ npm run dev:web:fr          # http://localhost:3007  (FR — € offers, open-en
 # From demo/ root — each market runs its own Metro bundler on a dedicated port
 npm run dev:mobile:uk       # Metro on :8081 — claims a dedicated simulator
 npm run dev:mobile:de       # Metro on :8082 — claims a separate simulator
+npm run dev:mobile:fr       # Metro on :8083 — claims a separate simulator
 ```
 
-Each command keeps its terminal alive as a Metro dev server (hot reload works independently per market). Simulators are claimed exclusively per market; both can run simultaneously without Xcode build conflicts.
+Each command keeps its terminal alive as a Metro dev server (hot reload works independently per market). Simulators are claimed exclusively per market; all three can run simultaneously without Xcode build conflicts.
 
 Note: the mobile composition files are byte-identical copies of the web ones — in the real
 monorepo these would be a single shared source. The app fetches from the BFF and, when it's

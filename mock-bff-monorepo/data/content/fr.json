@@ -1,0 +1,7 @@
+{
+  "offersFaq": [
+    { "q": "Comment participer ?", "a": "Choisissez un pack de participations ci-dessus, ou participez gratuitement par courrier." },
+    { "q": "Quand a lieu le tirage ?", "a": "Les tirages ont lieu chaque week-end." },
+    { "q": "Le prix est-il imposable ?", "a": "Veuillez consulter votre conseiller fiscal pour toute question relative à votre situation personnelle." }
+  ]
+}
