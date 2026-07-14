@@ -4,7 +4,6 @@ import { defineMarketApp, block, bind, env } from "omazifier";
 // bundle by id. Identical to uk.ts except market metadata/wiring and the /entry block:
 // DE uses `verified-entry` (KYC required, no postal route — Glücksspielstaatsvertrag).
 const NAV = [
-  { to: "/offers", labelId: "nav.offers" },
   { to: "/draws", labelId: "nav.draws" },
   { to: "/faq", labelId: "nav.faq" },
   { to: "/entry", labelId: "nav.entry" },
@@ -21,7 +20,7 @@ export default defineMarketApp({
     {
       path: "/",
       blocks: [
-        block("hero", { variant: "campaign", links: NAV }),
+        block("hero", { links: NAV, imageUrl: "http://localhost:4000/assets/Frankfurt.webp", primaryCtaLabelId: "nav.draws" }),
       ],
     },
     {
@@ -34,19 +33,7 @@ export default defineMarketApp({
     {
       path: "/draws",
       blocks: [
-        block("draw-select", {}),
-      ],
-    },
-    {
-      path: "/draws/confirm",
-      blocks: [
-        block("draw-confirm", {}),
-      ],
-    },
-    {
-      path: "/draws/success",
-      blocks: [
-        block("draw-success", {}),
+        block("draw/select", {}, { offers: bind.bff("offers") }),
       ],
     },
     {

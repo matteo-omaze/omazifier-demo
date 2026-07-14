@@ -1,10 +1,9 @@
 "use client";
-import type { OpenEntryConfig } from "./schemas";
+import type { OpenEntryConfig } from "../schemas";
 import { useTranslation } from "@/contexts/i18n";
 
 // THE SPLIT (UK side, client). Prize Competitions Act model: a free postal entry route. No config —
 // every display string (including the postal address) comes from the translation service by id.
-// Registered in omazifier/registry.ts.
 export function OpenEntry(_props: { config: OpenEntryConfig }) {
   const { t } = useTranslation();
   return (

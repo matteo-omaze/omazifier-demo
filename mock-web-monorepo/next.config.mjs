@@ -11,6 +11,7 @@ const MARKET = process.env.MARKET ?? "uk";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  devIndicators: false,
   distDir: `dist/${MARKET}`,
   webpack(config) {
     // Resolve the market-agnostic `active-market` import to the selected market's file BY CONVENTION.

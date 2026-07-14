@@ -25,7 +25,7 @@ export default function App() {
     let active = true;
     (async () => {
       setError(null);
-      if (!marketRoutes(app).includes(nav.path)) {
+      if (!marketRoutes(app, registry).includes(nav.path)) {
         if (active) setError(`No route "${nav.path}"`);
         return;
       }
@@ -56,9 +56,6 @@ export default function App() {
         <StatusBar barStyle="light-content" />
         <Header market={app.market.id} onHome={() => navigate("/")} />
         <ScrollView contentContainerStyle={styles.scroll}>
-          <Text style={styles.badge}>
-            market: {app.market.id} · {app.market.locale} · {app.market.currency} · {nav.path}
-          </Text>
           {error ? (
             <Text style={styles.error}>{error}</Text>
           ) : translations ? (
@@ -74,8 +71,7 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: "#f6f7fb" },
-  scroll: { padding: 16 },
-  badge: { color: "#6b7280", fontSize: 13, marginBottom: 12 },
-  error: { color: "#b00020", fontFamily: "Courier", fontSize: 12 },
+  safe: { flex: 1, backgroundColor: "#081F28" },
+  scroll: { paddingBottom: 24 },
+  error: { color: "#ff6b6b", fontFamily: "Courier", fontSize: 12, padding: 16 },
 });

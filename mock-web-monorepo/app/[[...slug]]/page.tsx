@@ -21,15 +21,14 @@ export default async function Page({
 }) {
   const { slug } = await params;
   const path = "/" + (slug ?? []).join("/");
-  if (!marketRoutes(app).includes(path)) notFound();
+  if (!marketRoutes(app, registry).includes(path)) notFound();
 
   try {
     // No resolveBinding passed → composePage uses omazifier's default (the demo BFF resolver).
     const { page, appData } = await composePage({ app, path, registry });
-    const badge = `market: ${app.market.id} · ${app.market.locale} · ${app.market.currency} · ${path}`;
     return (
       <main className={`market market--${app.market.id}`}>
-        <AppShell market={app.market.id} marketBadge={badge} translations={appData.translations as TranslationBundle}>
+        <AppShell market={app.market.id} translations={appData.translations as TranslationBundle}>
           <Suspense fallback={null}>
             {renderBlocks(page.blocks, createElement, app.market) as ReactNode[]}
           </Suspense>

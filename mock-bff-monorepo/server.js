@@ -67,6 +67,25 @@ const server = createServer((req, res) => {
       : send(200, value);
   }
 
+  // GET /assets/:filename — serve static image/asset files from ./assets/
+  const assetMatch = url.pathname.match(/^\/assets\/([\w.-]+)$/);
+  if (assetMatch) {
+    const ASSETS = new URL("./assets/", import.meta.url);
+    const ext = assetMatch[1].split(".").pop().toLowerCase();
+    const mime = { webp: "image/webp", png: "image/png", jpg: "image/jpeg", jpeg: "image/jpeg", svg: "image/svg+xml" };
+    try {
+      const buf = readFileSync(new URL(assetMatch[1], ASSETS));
+      res.setHeader("Content-Type", mime[ext] ?? "application/octet-stream");
+      res.setHeader("Content-Length", buf.length);
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.statusCode = 200;
+      res.end(buf);
+    } catch {
+      return send(404, { error: `Asset not found: "${assetMatch[1]}"` });
+    }
+    return;
+  }
+
   send(404, { error: "Not found" });
 });
 

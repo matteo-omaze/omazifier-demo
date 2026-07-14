@@ -10,19 +10,16 @@ import { Footer } from "./Footer";
 // in the shell rather than in each page's composition.
 export function AppShell({
   market,
-  marketBadge,
   translations,
   children,
 }: {
   market: string;
-  marketBadge: string;
   translations: TranslationBundle;
   children: ReactNode;
 }) {
   return (
     <TranslationProvider bundle={translations}>
       <Header market={market} />
-      <div className="market__badge">{marketBadge}</div>
       {children}
       <Footer />
     </TranslationProvider>

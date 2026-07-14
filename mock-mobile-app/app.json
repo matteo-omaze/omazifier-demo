@@ -11,8 +11,9 @@
       "ios",
       "android"
     ],
+    "icon": "./assets/icon.png",
     "splash": {
-      "backgroundColor": "#221943"
+      "backgroundColor": "#081F28"
     },
     "ios": {
       "bundleIdentifier": "com.anonymous.omazifier-mobile"

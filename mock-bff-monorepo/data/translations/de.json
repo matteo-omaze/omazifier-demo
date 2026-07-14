@@ -1,6 +1,8 @@
 {
   "hero.tag": "Bayern",
-  "hero.heading": "Gewinne dieses Haus in Bayern im Wert von 4.000.000 €",
+  "hero.heading": "Gewinne dieses Haus im Wert von 4.000.000 €",
+  "hero.headingSub": "in Bayern",
+  "hero.cta": "Jetzt mitmachen",
   "hero.subheading": "Plus 250.000 € in bar. Jetzt an unseren Verlosungen teilnehmen.",
   "nav.offers": "Angebote ansehen",
   "nav.draws": "Zur Verlosung",
@@ -38,5 +40,6 @@
   "verifiedEntry.badge": "Verifizierung erforderlich",
   "verifiedEntry.body": "Zur Teilnahme ist eine Identitätsprüfung gesetzlich vorgeschrieben. Verfahren: {provider}.",
   "verifiedEntry.provider.schufa": "SCHUFA-Identitätsprüfung",
-  "verifiedEntry.provider.postident": "PostIdent-Verfahren"
+  "verifiedEntry.provider.postident": "PostIdent-Verfahren",
+  "verifiedEntry.cta": "Identifizierung starten"
 }

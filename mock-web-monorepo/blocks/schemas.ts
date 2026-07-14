@@ -6,9 +6,9 @@ import { z } from "zod";
 // Configs carry only behavioural knobs + route ids — never display strings. Every string a block
 // shows comes from the translation service by id. Markets differ by config/bundle, not language.
 export const heroConfig = z.object({
-  variant: z.enum(["campaign", "plain"]).default("plain"),
-  // Landing nav: each link is a route `to` + a translation id for its label (no raw strings).
   links: z.array(z.object({ to: z.string(), labelId: z.string() })).default([]),
+  imageUrl: z.string().optional(),
+  primaryCtaLabelId: z.string().optional(),
 });
 
 export const offerGridConfig = z.object({
@@ -17,9 +17,11 @@ export const offerGridConfig = z.object({
 
 export const faqConfig = z.object({});
 
-// The draw flow is now three routed steps, each its own block/route (select → confirm → success).
+// The draw flow is three routed steps: select (bundle pick) → confirm (image + value review) → success.
 export const drawSelectConfig = z.object({});
-export const drawConfirmConfig = z.object({});
+export const drawConfirmConfig = z.object({
+  imageUrl: z.string().optional(),
+});
 export const drawSuccessConfig = z.object({});
 
 // One registry entry whose nested sections are deep-linkable by anchor, not registered.

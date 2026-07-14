@@ -17,7 +17,7 @@ apps on mobile): one build = one market, rooted at `/`, as a set of **routes**:
 ```
 /                → hero (landing) — links to the routes below
 /offers          → offer-grid
-/draws           → draw-select ──► /draws/confirm → draw-confirm ──► /draws/success → draw-success
+/draws           → draw/select ──► /draws/confirm → draw/confirm ──► /draws/success → draw/success
 /faq             → faq  +  terms (with deep-linkable experience rules)
 /entry           → [ entry-route ]
 ```
@@ -31,8 +31,13 @@ Routing selects a **page** (a set of blocks); the app's router maps the URL path
   - **UK → `open-entry`** — free postal route ("No purchase necessary", Prize Competitions Act).
   - **DE → `verified-entry`** — KYC identity check (SCHUFA/PostIdent, Glücksspielstaatsvertrag);
     no postal route exists.
-- The **draw flow is three routed step blocks** (`draw-select` → `draw-confirm` → `draw-success`),
-  navigating by link/route with the choice carried as a query/nav param.
+- The **draw flow is three routed step blocks** (`draw/select` → `draw/confirm` → `draw/success`),
+  navigating by link/route with the choice carried as a query/nav param. The three blocks live under
+  `blocks/draw/` and are grouped there because they only make sense together. The engine enforces
+  this: `draw/select` carries a `requires` declaration, so a market config needs only one line
+  (`block("draw/select", ...)` at `/draws`) — the engine auto-mounts `/draws/confirm` and
+  `/draws/success` via `expandRequires`. Attempting to mount `draw/confirm` or `draw/success`
+  standalone would be meaningless, and the grouping makes that impossible by convention.
 - `terms` shows **deep-linkable nested content**: its nested "experience rules" has an anchor
   (`#house-draw-rules`) and the `faq` block links straight to it — without the sub-section being a
   registry entry.
@@ -40,8 +45,8 @@ Routing selects a **page** (a set of blocks); the app's router maps the URL path
   the shell on every route (not omazifier blocks). The **`charity-ad`** is a reusable *block* —
   placed on both `/offers` and `/faq` in the composition, showing a block can appear on many routes.
 
-Both markets are defined by one composition file each (`markets/uk.ts`, `markets/de.ts`) — the only
-per-market artifact. Swap `open-entry` for `verified-entry` in the file and the page changes; no
+Three markets are defined by one composition file each (`markets/uk.ts`, `markets/de.ts`,
+`markets/fr.ts`) — the only per-market artifact. Swap `open-entry` for `verified-entry` in the file and the page changes; no
 per-market source is generated or hand-edited. Each build is **scoped to one market**: `MARKET=uk`
 resolves the market-agnostic `active-market` import to `markets/uk.ts` and nothing from another
 market enters the bundle. **Adding a market is a pure file-drop** — a new `markets/<code>.ts` plus
@@ -104,11 +109,10 @@ npm install
 # Terminal 1 — the mock BFF
 npm run dev:bff             # http://localhost:4000
 
-# Terminal 2 — the web app for ONE market (pick with MARKET, defaults to uk)
-MARKET=uk npm run dev:web   # http://localhost:3000  (UK — £ offers, open-entry)
-#   open http://localhost:3000          (landing hero → click the nav links)
-#   open http://localhost:3000/offers   (£ offers) · /draws · /faq · /entry
-MARKET=de npm run dev:web   # the DE app instead (€ offers, verified-entry at /entry)
+# Terminal 2/3/4 — one web app per market (each on its own port)
+npm run dev:web:uk          # http://localhost:3005  (UK — £ offers, open-entry)
+npm run dev:web:de          # http://localhost:3006  (DE — € offers, verified-entry at /entry)
+npm run dev:web:fr          # http://localhost:3007  (FR — € offers, open-entry, Loire house)
 ```
 
 ### Mobile (Expo)
@@ -155,5 +159,6 @@ BFF's `data/{offers,content,translations}/<code>.json`, then build with `MARKET=
 - Each market is an **independent build target** (`dist-<market>/`, one bundle per market): rebuilding
   one never touches another, and no market's composition leaks into another's build.
 - **Adding a market takes no code edits** — a composition file plus its BFF data/translations,
-  auto-discovered by convention (verified live by adding, building, and rendering a throwaway `fr`).
+  auto-discovered by convention (verified live by adding the `fr` market: Loire house, vacation
+  campaign, and all draw/entry flows, with FR translations using narrow no-break spaces for currency).
 - Validation catches unknown block ids and bad per-block config at build, with precise paths.

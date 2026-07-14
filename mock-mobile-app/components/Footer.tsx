@@ -1,8 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import { useTranslation } from "../contexts/i18n";
 
-// App CHROME (not an omazifier block): the same footer on every route. Its text is a translation id,
-// so it renders inside the app's translation context (AppShell).
 export function Footer() {
   const { t } = useTranslation();
   return (
@@ -13,6 +11,6 @@ export function Footer() {
 }
 
 const styles = StyleSheet.create({
-  footer: { paddingVertical: 20, paddingHorizontal: 8 },
-  text: { color: "#6b7280", fontSize: 12, textAlign: "center" },
+  footer: { paddingVertical: 24, paddingHorizontal: 16, borderTopWidth: 1, borderTopColor: "rgba(255,255,255,0.08)" },
+  text: { color: "rgba(255,255,255,0.45)", fontSize: 12, textAlign: "center" },
 });

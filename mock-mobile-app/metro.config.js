@@ -7,8 +7,6 @@
 //       mock-mobile-app/  ← this file (projectRoot)
 //
 // omazifier is linked into workspaceRoot/node_modules/omazifier via npm workspaces.
-// nodeModulesPaths must point at the hoisted workspace node_modules — NOT the engine's own
-// node_modules — so React resolves to a single copy and hooks don't break.
 const { getDefaultConfig } = require("expo/metro-config");
 const path = require("path");
 
@@ -18,32 +16,39 @@ const engineRoot = path.resolve(projectRoot, "../../omazifier");
 
 const config = getDefaultConfig(projectRoot);
 
-// Watch workspace root (for all packages) and engine source (for hot reload on engine edits).
 config.watchFolders = [workspaceRoot, engineRoot];
 
-// Hoisted workspace node_modules first, then project-local. Never the engine's own
-// node_modules — that causes duplicate-React hooks errors.
+// Workspace node_modules first so hoisted packages win over any project-local leftovers.
 config.resolver.nodeModulesPaths = [
   path.resolve(workspaceRoot, "node_modules"),
   path.resolve(projectRoot, "node_modules"),
 ];
 config.resolver.unstable_enableSymlinks = true;
 
-// Pin React + React Native to a single physical path so no symlink traversal can
-// cause Metro to load a second copy. This is the canonical fix for the
-// "Invalid hook call / duplicate React" error in monorepo setups.
-config.resolver.extraNodeModules = {
-  react: path.resolve(workspaceRoot, "node_modules/react"),
-  "react-native": path.resolve(workspaceRoot, "node_modules/react-native"),
-};
+// Pin React to a single physical path via resolveRequest (extraNodeModules is fallback-only
+// and won't override a local node_modules/react that already exists).
+const REACT_ROOT = path.dirname(
+  require.resolve("react/package.json", { paths: [workspaceRoot] })
+);
 
-// PER-MARKET BUNDLE. MARKET env var selects which composition file the bundle includes.
-// Adding a market = drop omazifier/markets/<code>.ts, no code edits needed.
-const MARKET = process.env.MARKET || "uk";
-const activeMarket = path.resolve(projectRoot, `omazifier/markets/${MARKET}.ts`);
+// Market is selected at runtime per-simulator via NSUserDefaults (see active-market-runtime.ts).
+const activeMarket = path.resolve(projectRoot, "active-market-runtime.ts");
+
 config.resolver.resolveRequest = (context, moduleName, platform) => {
   if (moduleName === "active-market") {
     return { type: "sourceFile", filePath: activeMarket };
+  }
+  // Force every react import (including jsx-runtime) to the single workspace copy.
+  // Without this, Metro resolves react from each importing file's nearest node_modules,
+  // which causes two React instances → "Invalid hook call" crash.
+  if (moduleName === "react") {
+    return { type: "sourceFile", filePath: path.join(REACT_ROOT, "index.js") };
+  }
+  if (moduleName === "react/jsx-runtime") {
+    return { type: "sourceFile", filePath: path.join(REACT_ROOT, "jsx-runtime.js") };
+  }
+  if (moduleName === "react/jsx-dev-runtime") {
+    return { type: "sourceFile", filePath: path.join(REACT_ROOT, "jsx-dev-runtime.js") };
   }
   return context.resolveRequest(context, moduleName, platform);
 };

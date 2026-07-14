@@ -14,13 +14,13 @@ import {
 import { Hero } from "../blocks/Hero";
 import { OfferGrid } from "../blocks/OfferGrid";
 import { Faq } from "../blocks/Faq";
-import { DrawSelect } from "../blocks/DrawSelect";
-import { DrawConfirm } from "../blocks/DrawConfirm";
-import { DrawSuccess } from "../blocks/DrawSuccess";
+import { DrawSelect } from "../blocks/draw/Select";
+import { DrawConfirm } from "../blocks/draw/Confirm";
+import { DrawSuccess } from "../blocks/draw/Success";
 import { Terms } from "../blocks/Terms";
 import { CharityAd } from "../blocks/CharityAd";
-import { OpenEntry } from "../blocks/OpenEntry";
-import { VerifiedEntry } from "../blocks/VerifiedEntry";
+import { OpenEntry } from "../blocks/entry/Open";
+import { VerifiedEntry } from "../blocks/entry/Verified";
 
 // Same contract as the web repo (identical defineRegistry shape) — only the components differ
 // (RN vs DOM). This is the shared component library every market bundle depends on; the active
@@ -28,9 +28,17 @@ import { VerifiedEntry } from "../blocks/VerifiedEntry";
 export const registry = defineRegistry([
   { id: "hero", configSchema: heroConfig, component: Hero as any },
   { id: "offer-grid", configSchema: offerGridConfig, component: OfferGrid as any },
-  { id: "draw-select", configSchema: drawSelectConfig, component: DrawSelect as any },
-  { id: "draw-confirm", configSchema: drawConfirmConfig, component: DrawConfirm as any },
-  { id: "draw-success", configSchema: drawSuccessConfig, component: DrawSuccess as any },
+  {
+    id: "draw/select",
+    configSchema: drawSelectConfig,
+    component: DrawSelect as any,
+    requires: [
+      { blockId: "draw/confirm", subPath: "/confirm" },
+      { blockId: "draw/success", subPath: "/success" },
+    ],
+  },
+  { id: "draw/confirm", configSchema: drawConfirmConfig, component: DrawConfirm as any, private: true },
+  { id: "draw/success", configSchema: drawSuccessConfig, component: DrawSuccess as any, private: true },
   { id: "faq", configSchema: faqConfig, component: Faq as any },
   { id: "terms", configSchema: termsConfig, component: Terms as any },
   { id: "charity-ad", configSchema: charityAdConfig, component: CharityAd as any },

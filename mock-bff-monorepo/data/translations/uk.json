@@ -1,7 +1,10 @@
 {
   "hero.tag": "London",
-  "hero.heading": "Win this £4,000,000 house in Bath",
+  "hero.heading": "Win this £4,000,000 house",
+  "hero.headingSub": "in Bath",
+  "hero.cta": "Enter now",
   "hero.subheading": "Plus £250,000 in cash. Enter our live draws now.",
+  "campaign.monthly.heading": "WIN £1M",
   "nav.offers": "See the offers",
   "nav.draws": "Enter the draw",
   "nav.faq": "FAQs",

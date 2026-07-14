@@ -26,10 +26,10 @@ export function Faq({ data }: { config: FaqConfig; data: { items?: FaqItem[] } }
 }
 
 const styles = StyleSheet.create({
-  wrap: { marginBottom: 16 },
-  heading: { fontSize: 18, fontWeight: "700", marginBottom: 8 },
-  item: { borderTopWidth: 1, borderTopColor: "#e5e7eb", paddingVertical: 10 },
-  q: { fontWeight: "600" },
-  a: { color: "#6b7280", marginTop: 2 },
-  rulesLink: { color: "#6c5ce7", fontWeight: "600", marginTop: 14 },
+  wrap: { marginBottom: 16, paddingHorizontal: 16, paddingTop: 20 },
+  heading: { fontSize: 22, fontWeight: "900", lineHeight: 28, marginBottom: 14, color: "#FFDD00" },
+  item: { borderTopWidth: 1, borderTopColor: "rgba(255,255,255,0.12)", paddingVertical: 14 },
+  q: { fontWeight: "700", color: "#FEFBF6", lineHeight: 16, letterSpacing: -0.14, fontSize: 15 },
+  a: { color: "rgba(255,255,255,0.65)", marginTop: 4, lineHeight: 15, letterSpacing: -0.14 },
+  rulesLink: { color: "#FFDD00", fontWeight: "700", marginTop: 16, letterSpacing: 0.28 },
 });

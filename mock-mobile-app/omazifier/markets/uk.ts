@@ -22,7 +22,7 @@ export default defineMarketApp({
     {
       path: "/",
       blocks: [
-        block("hero", { variant: "campaign", links: NAV }),
+        block("hero", { links: NAV, imageUrl: "http://localhost:4000/assets/Hero.webp", primaryCtaLabelId: "nav.draws" }),
       ],
     },
     {
@@ -35,19 +35,7 @@ export default defineMarketApp({
     {
       path: "/draws",
       blocks: [
-        block("draw-select", {}),
-      ],
-    },
-    {
-      path: "/draws/confirm",
-      blocks: [
-        block("draw-confirm", {}),
-      ],
-    },
-    {
-      path: "/draws/success",
-      blocks: [
-        block("draw-success", {}),
+        block("draw/select", {}, { offers: bind.bff("offers") }),
       ],
     },
     {
