@@ -98,8 +98,15 @@ fi
 # Write the active market to NSUserDefaults so Settings.get("activeMarket") returns it.
 xcrun simctl spawn "$TARGET_UDID" defaults write "$BUNDLE_ID" activeMarket "$MARKET" 2>/dev/null || true
 
-# Each market runs its own Metro on its own port, keeping this terminal alive with the bundler.
-# Xcode incremental builds mean rebuilds after the first run are fast.
+# Each market gets its own DerivedData directory to prevent build.db lock contention when
+# multiple markets are built concurrently. Expo 54 doesn't expose -derivedDataPath, so we
+# intercept xcodebuild via a PATH wrapper that prepends the flag transparently.
+DERIVED_DATA="$HOME/Library/Developer/Xcode/DerivedData/omazifier-$MARKET"
+WRAPPER_DIR="/tmp/omazifier-xcodebuild-$MARKET"
+mkdir -p "$WRAPPER_DIR"
+printf '#!/bin/bash\nexec /usr/bin/xcodebuild -derivedDataPath "%s" "$@"\n' "$DERIVED_DATA" > "$WRAPPER_DIR/xcodebuild"
+chmod +x "$WRAPPER_DIR/xcodebuild"
+
 cd "$APP_DIR"
-export PATH="$(gem environment gemdir)/bin:$PATH"
+export PATH="$WRAPPER_DIR:$(gem environment gemdir)/bin:$PATH"
 exec env expo run:ios --port "$PORT" --device "$TARGET_UDID"
