@@ -36,8 +36,9 @@ Routing selects a **page** (a set of blocks); the app's router maps the URL path
   `blocks/draw/` and are grouped there because they only make sense together. The engine enforces
   this: `draw/select` carries a `requires` declaration, so a market config needs only one line
   (`block("draw/select", ...)` at `/draws`) — the engine auto-mounts `/draws/confirm` and
-  `/draws/success` via `expandRequires`. Attempting to mount `draw/confirm` or `draw/success`
-  standalone would be meaningless, and the grouping makes that impossible by convention.
+  `/draws/success` via `expandRequires`. `draw/confirm` and `draw/success` are marked `private: true`
+  in the registry, so `validateComposition` rejects any market file that places them directly —
+  they can only be mounted by the engine via `requires`.
 - `terms` shows **deep-linkable nested content**: its nested "experience rules" has an anchor
   (`#house-draw-rules`) and the `faq` block links straight to it — without the sub-section being a
   registry entry.
@@ -118,11 +119,12 @@ npm run dev:web:fr          # http://localhost:3007  (FR — € offers, open-en
 ### Mobile (Expo)
 
 ```sh
-cd demo/mock-mobile-app
-npm install
-npm run start:uk            # (or start:de) then press i (iOS sim) / a (Android) / scan in Expo Go
-#   in-app nav via the header/hero links; the entry route renders open-entry (UK) / verified-entry (DE)
+# From demo/ root — each market runs its own Metro bundler on a dedicated port
+npm run dev:mobile:uk       # Metro on :8081 — claims a dedicated simulator
+npm run dev:mobile:de       # Metro on :8082 — claims a separate simulator
 ```
+
+Each command keeps its terminal alive as a Metro dev server (hot reload works independently per market). Simulators are claimed exclusively per market; both can run simultaneously without Xcode build conflicts.
 
 Note: the mobile composition files are byte-identical copies of the web ones — in the real
 monorepo these would be a single shared source. The app fetches from the BFF and, when it's
