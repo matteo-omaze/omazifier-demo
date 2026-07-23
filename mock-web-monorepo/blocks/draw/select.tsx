@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import type { Market } from "omazifier";
-import type { DrawSelectConfig } from "../schemas";
+import type { DrawSelectConfig } from "./select.schema";
 import { useTranslation } from "@/contexts/i18n";
 
 type Offer = { id: string; entries: number; price: number; wasPrice: number | null; ribbon: string | null };

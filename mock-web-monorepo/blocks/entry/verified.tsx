@@ -1,5 +1,5 @@
 "use client";
-import type { VerifiedEntryConfig } from "../schemas";
+import type { VerifiedEntryConfig } from "./verified.schema";
 import { useTranslation } from "@/contexts/i18n";
 
 // THE SPLIT (DE side, client). Glücksspielstaatsvertrag lottery model: identity verification is

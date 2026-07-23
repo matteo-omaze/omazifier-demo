@@ -33,11 +33,13 @@
     "**/*.tsx",
     "dist/*/types/**/*.ts",
     "dist/de/types/**/*.ts",
+    "dist/fr/types/**/*.ts",
     "dist/uk/types/**/*.ts",
     "next-env.d.ts",
-    "dist/fr/types/**/*.ts"
+    ".next/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "infra"
   ]
 }

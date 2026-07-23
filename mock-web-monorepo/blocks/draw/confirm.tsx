@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import type { Market } from "omazifier";
-import type { DrawConfirmConfig } from "../schemas";
+import type { DrawConfirmConfig } from "./confirm.schema";
 import { useTranslation } from "@/contexts/i18n";
 
 export function DrawConfirm({ config, market }: { config: DrawConfirmConfig; market: Market }) {

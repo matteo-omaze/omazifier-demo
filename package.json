@@ -8,9 +8,14 @@
     "mock-mobile-app",
     "mock-web-monorepo"
   ],
+  "allowScripts": {
+    "esbuild": true,
+    "fsevents": true,
+    "sharp": true
+  },
   "overrides": {
-    "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react": "19.2.7",
+    "react-dom": "19.2.7"
   },
   "scripts": {
     "sim": "bash scripts/start-simulator.sh",

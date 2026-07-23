@@ -1,5 +1,5 @@
 "use client";
-import type { FaqConfig } from "./schemas";
+import type { FaqConfig } from "./faq.schema";
 import { useTranslation } from "@/contexts/i18n";
 
 // SHARED configurable block (client). FAQ items are CONTENT — bound from Sanity (runtime).

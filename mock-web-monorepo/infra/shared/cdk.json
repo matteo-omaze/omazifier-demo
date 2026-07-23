@@ -1,0 +1,10 @@
+{
+  "app": "npx tsx --tsconfig tsconfig.json bin/app.ts",
+  "watch": {
+    "include": ["bin/**", "infra/**", "../market_deployments.ts"],
+    "exclude": ["cdk*.json", "**/*.d.ts", "node_modules"]
+  },
+  "context": {
+    "@aws-cdk/core:target-partitions": ["aws"]
+  }
+}

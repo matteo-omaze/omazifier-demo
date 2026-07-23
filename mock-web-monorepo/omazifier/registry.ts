@@ -1,16 +1,14 @@
 import { defineRegistry } from "omazifier";
-import {
-  heroConfig,
-  offerGridConfig,
-  faqConfig,
-  drawSelectConfig,
-  drawConfirmConfig,
-  drawSuccessConfig,
-  termsConfig,
-  charityAdConfig,
-  openEntryConfig,
-  verifiedEntryConfig,
-} from "@/blocks/schemas";
+import { heroConfig } from "@/blocks/hero.schema";
+import { offerGridConfig } from "@/blocks/offer-grid.schema";
+import { faqConfig } from "@/blocks/faq.schema";
+import { drawSelectConfig } from "@/blocks/draw/select.schema";
+import { drawConfirmConfig } from "@/blocks/draw/confirm.schema";
+import { drawSuccessConfig } from "@/blocks/draw/success.schema";
+import { termsConfig } from "@/blocks/terms.schema";
+import { charityAdConfig } from "@/blocks/charity-ad.schema";
+import { openEntryConfig } from "@/blocks/entry/open.schema";
+import { verifiedEntryConfig } from "@/blocks/entry/verified.schema";
 import { Hero } from "@/blocks/hero";
 import { OfferGrid } from "@/blocks/offer-grid";
 import { Faq } from "@/blocks/faq";

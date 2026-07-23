@@ -24,6 +24,17 @@ apps on mobile): one build = one market, rooted at `/`, as a set of **routes**:
 
 Routing selects a **page** (a set of blocks); the app's router maps the URL path → `composePage(path)`.
 
+## Plumbing at a glance
+
+Both apps follow the same pattern:
+
+1. **Market config** — `MARKET=uk` resolves the `active-market` alias to `omazifier/markets/uk.ts` (webpack on web, Metro `resolveRequest` on mobile). The market file is the only per-market source — one composition file, no generated code.
+2. **composePage** — the entry point. Validates, expands `requires`, resolves all data bindings (BFF + translations), returns `{ page.blocks, appData }`.
+3. **renderBlocks** — platform-agnostic: takes a `createElement` function. Web gets DOM components; mobile gets RN components. Same call, different registry.
+4. **AppShell** — app-owned. Provides `I18nProvider` (translations → `t(id)`) and in mobile also `NavContext`. Not an omazifier concept — just a context boundary.
+
+See `mock-web-monorepo/README.md` and `mock-mobile-app/README.md` for per-platform detail.
+
 - `hero`, `offer-grid`, `faq` are **one configurable block each** — identical component, different
   config + content + currency (£ vs €). This is the "very similar → one component" case.
 - The `/entry` route is **THE SPLIT**: a genuine regulatory divergence that config can't bridge,
@@ -82,9 +93,9 @@ app passes none. Each app's omazifier surface is its **`omazifier/` folder** = `
 on web, Metro `resolveRequest` on mobile). `registry.ts` is the **shared component library** (all
 blocks) and holds no per-market knowledge. The **shell** (`components/AppShell`, `Header`, `Footer`)
 and the **translation/nav contexts** (`contexts/`) are app-owned. The apps don't write a data
-resolver — web uses omazifier's default; mobile wraps it with `withOfflineFallback` (a DEMO-ONLY
-export from the engine that serves bundled UK/DE sample data when the BFF is unreachable). See
-`../omazifier-design.md` › *Consumption model*.
+resolver — both apps use `withOfflineFallback(defaultResolveBinding)` — the deployed Lambda and the
+mobile simulator both work without a live BFF (DEMO-ONLY export from the engine; serves bundled
+UK/DE sample data when the BFF is unreachable). See `../omazifier-design.md` › *Consumption model*.
 
 The mock BFF is **convention-based**: every domain is a folder under `data/`, every market a JSON
 file — `data/offers/<market>.json`, `data/content/<market>.json`, `data/translations/<market>.json`.

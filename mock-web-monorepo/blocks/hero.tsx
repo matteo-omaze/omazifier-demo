@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import type { Market } from "omazifier";
-import type { HeroConfig } from "./schemas";
+import type { HeroConfig } from "./hero.schema";
 import { useTranslation } from "@/contexts/i18n";
 
 const VB_W = 1000;

@@ -1,8 +1,8 @@
 import { createElement, Suspense, type ReactNode } from "react";
 import { notFound } from "next/navigation";
-import { composePage, renderBlocks, marketRoutes, CompositionError } from "omazifier";
+import { composePage, renderBlocks, marketRoutes, CompositionError, withOfflineFallback, defaultResolveBinding } from "omazifier";
 import app from "active-market";
-import { registry } from "@/omazifier/registry";
+import { registry } from "active-registry";
 import { AppShell } from "@/components/AppShell";
 import type { TranslationBundle } from "@/contexts/i18n";
 
@@ -24,8 +24,8 @@ export default async function Page({
   if (!marketRoutes(app, registry).includes(path)) notFound();
 
   try {
-    // No resolveBinding passed → composePage uses omazifier's default (the demo BFF resolver).
-    const { page, appData } = await composePage({ app, path, registry });
+    // Use the offline fallback so the demo works without a live BFF (Lambda can't reach localhost).
+    const { page, appData } = await composePage({ app, path, registry, resolveBinding: withOfflineFallback(defaultResolveBinding) });
     return (
       <main className={`market market--${app.market.id}`}>
         <AppShell market={app.market.id} translations={appData.translations as TranslationBundle}>

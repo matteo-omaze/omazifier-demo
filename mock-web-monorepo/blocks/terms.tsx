@@ -1,5 +1,5 @@
 "use client";
-import type { TermsConfig } from "./schemas";
+import type { TermsConfig } from "./terms.schema";
 import { useTranslation } from "@/contexts/i18n";
 
 // DEEP-LINKABLE NESTED CONTENT behind a single registry entry. `terms` is registered; its nested

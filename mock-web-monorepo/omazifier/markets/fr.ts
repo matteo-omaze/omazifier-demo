@@ -28,7 +28,6 @@ export default defineMarketApp({
       path: "/offers",
       blocks: [
         block("offer-grid", { columns: 3 }, { offers: bind.bff("offers") }),
-        block("charity-ad", {}),
       ],
     },
     {
@@ -41,7 +40,6 @@ export default defineMarketApp({
       path: "/faq",
       blocks: [
         block("faq", {}, { items: bind.sanity("offersFaq") }),
-        block("charity-ad", {}),
         block("terms", {}),
       ],
     },
