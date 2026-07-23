@@ -22,7 +22,7 @@ function OmazeMark({ size = 28, color = "#081F28" }: { size?: number; color?: st
   );
 }
 
-const FLAG: Record<string, string> = { uk: "🇬🇧", de: "🇩🇪" };
+const FLAG: Record<string, string> = { uk: "🇬🇧", de: "🇩🇪", fr: "🇫🇷" };
 
 export function Header({ market, onHome }: { market: string; onHome: () => void }) {
   return (

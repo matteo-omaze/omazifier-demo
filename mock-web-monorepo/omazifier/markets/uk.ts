@@ -22,7 +22,7 @@ export default defineMarketApp({
     {
       path: "/",
       blocks: [
-        block("hero", { links: NAV, imageUrl: "http://localhost:4000/assets/Hero.webp", primaryCtaLabelId: "nav.draws" }),
+        block("hero", { links: NAV, imageUrl: "/assets/Hero.webp", primaryCtaLabelId: "nav.draws" }),
       ],
     },
     {

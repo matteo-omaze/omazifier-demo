@@ -1,5 +1,5 @@
 "use client";
-import type { OpenEntryConfig } from "../schemas";
+import type { OpenEntryConfig } from "./open.schema";
 import { useTranslation } from "@/contexts/i18n";
 
 // THE SPLIT (UK side, client). Prize Competitions Act model: a free postal entry route. No config —

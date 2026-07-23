@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import type { Market } from "omazifier";
-import type { DrawSuccessConfig } from "../schemas";
+import type { DrawSuccessConfig } from "./success.schema";
 import { useTranslation } from "@/contexts/i18n";
 
 export function DrawSuccess({ market }: { config: DrawSuccessConfig; market: Market }) {

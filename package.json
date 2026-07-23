@@ -8,16 +8,23 @@
     "mock-mobile-app",
     "mock-web-monorepo"
   ],
+  "allowScripts": {
+    "esbuild": true,
+    "fsevents": true,
+    "sharp": true
+  },
   "overrides": {
-    "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react": "19.2.7",
+    "react-dom": "19.2.7"
   },
   "scripts": {
     "sim": "bash scripts/start-simulator.sh",
     "dev:bff": "npm --workspace mock-bff-monorepo run start",
     "dev:mobile:uk": "MARKET=uk bash scripts/dev-ios.sh",
     "dev:mobile:de": "MARKET=de bash scripts/dev-ios.sh",
+    "dev:mobile:fr": "MARKET=fr bash scripts/dev-ios.sh",
     "dev:web:uk": "MARKET=uk PORT=3005 npm --workspace mock-web-monorepo run dev",
-    "dev:web:de": "MARKET=de PORT=3006 npm --workspace mock-web-monorepo run dev"
+    "dev:web:de": "MARKET=de PORT=3006 npm --workspace mock-web-monorepo run dev",
+    "dev:web:fr": "MARKET=fr PORT=3007 npm --workspace mock-web-monorepo run dev"
   }
 }

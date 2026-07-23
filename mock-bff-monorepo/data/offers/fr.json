@@ -1,0 +1,36 @@
+{
+  "event": "house-open",
+  "market": "fr",
+  "currency": "EUR",
+  "campaigns": [
+    {
+      "id": "house",
+      "imageUrl": "http://localhost:4000/assets/Loire.webp",
+      "tagKey": "hero.tag",
+      "headingKey": "hero.heading",
+      "ctaLabelKey": "offerGrid.cta",
+      "ctaPath": "/offers"
+    },
+    {
+      "id": "monthly",
+      "imageUrl": "http://localhost:4000/assets/MonthlyMillionaire.webp",
+      "tagKey": "hero.tag",
+      "headingKey": "campaign.monthly.heading",
+      "ctaLabelKey": "offerGrid.cta",
+      "ctaPath": "/draws"
+    },
+    {
+      "id": "vacation",
+      "imageUrl": "http://localhost:4000/assets/Vacation.webp",
+      "tagKey": "campaign.vacation.tag",
+      "headingKey": "campaign.vacation.heading",
+      "ctaLabelKey": "offerGrid.cta",
+      "ctaPath": "/draws"
+    }
+  ],
+  "offers": [
+    { "id": "fr-1", "entries": 15, "price": 1200, "wasPrice": 2400, "ribbon": "offerGrid.ribbon.twoForOne", "checkoutUrl": "https://omaze.fr/cart/fr-1?discount=HO1O1" },
+    { "id": "fr-2", "entries": 40, "price": 3000, "wasPrice": null, "ribbon": "offerGrid.ribbon.mostPopular", "checkoutUrl": "https://omaze.fr/cart/fr-2?discount=HO1O2" },
+    { "id": "fr-3", "entries": 85, "price": 6000, "wasPrice": null, "ribbon": "offerGrid.ribbon.bestValue", "checkoutUrl": "https://omaze.fr/cart/fr-3?discount=HO1O3" }
+  ]
+}

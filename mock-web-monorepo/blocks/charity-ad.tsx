@@ -1,5 +1,5 @@
 "use client";
-import type { CharityAdConfig } from "./schemas";
+import type { CharityAdConfig } from "./charity-ad.schema";
 import { useTranslation } from "@/contexts/i18n";
 
 // A REUSABLE block: the same `charity-ad` is placed on more than one page (/offers and /faq) in the

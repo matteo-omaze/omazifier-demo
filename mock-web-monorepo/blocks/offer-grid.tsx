@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useState, useRef } from "react";
 import type { Market } from "omazifier";
-import type { OfferGridConfig } from "./schemas";
+import type { OfferGridConfig } from "./offer-grid.schema";
 import { useTranslation } from "@/contexts/i18n";
 
 type Campaign = { id: string; imageUrl: string; tagKey: string; headingKey: string; ctaLabelKey: string; ctaPath: string };

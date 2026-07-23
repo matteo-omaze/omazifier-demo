@@ -6,7 +6,33 @@
   "scripts": {
     "dev": "MARKET=${MARKET:-uk} next dev -p ${PORT:-3000}",
     "build": "MARKET=${MARKET:-uk} next build",
-    "start": "MARKET=${MARKET:-uk} next start -p ${PORT:-3000}"
+    "start": "MARKET=${MARKET:-uk} next start -p ${PORT:-3000}",
+    "prune-registry": "omazifier-prune",
+    "build:uk": "MARKET=uk npm run prune-registry && MARKET=uk PRUNED=1 npm run build",
+    "build:de": "MARKET=de npm run prune-registry && MARKET=de PRUNED=1 npm run build",
+    "build:fr": "MARKET=fr npm run prune-registry && MARKET=fr PRUNED=1 npm run build",
+
+    "open-next:uk": "MARKET=uk SHARP_VERSION=0.34.5 open-next build",
+    "open-next:de": "MARKET=de SHARP_VERSION=0.34.5 open-next build",
+    "open-next:fr": "MARKET=fr SHARP_VERSION=0.34.5 open-next build",
+
+    "infra:bootstrap": "npm run open-next:uk && cdk --app 'npx tsx infra/bin/app.ts' --output /tmp/omazifier-market.out bootstrap aws://$AWS_ACCOUNT_ID/${AWS_REGION:-eu-west-2} && cdk --app 'npx tsx infra/bin/app.ts' --output /tmp/omazifier-market.out bootstrap aws://$AWS_ACCOUNT_ID/us-east-1",
+
+    "infra:shared:deploy": "cdk --app 'npx tsx infra/shared/bin/app.ts' --output /tmp/omazifier-shared.out deploy --require-approval never",
+    "infra:shared:destroy": "cdk --app 'npx tsx infra/shared/bin/app.ts' --output /tmp/omazifier-shared.out destroy --force",
+    "infra:shared:status": "bash infra/scripts/status.sh shared",
+
+    "infra:deploy:uk": "npm run open-next:uk && cdk --app 'npx tsx infra/bin/app.ts' --output /tmp/omazifier-market.out deploy Omazifier-UK --require-approval never",
+    "infra:deploy:de": "npm run open-next:de && cdk --app 'npx tsx infra/bin/app.ts' --output /tmp/omazifier-market.out deploy Omazifier-DE --require-approval never",
+    "infra:deploy:fr": "npm run open-next:fr && cdk --app 'npx tsx infra/bin/app.ts' --output /tmp/omazifier-market.out deploy Omazifier-FR --require-approval never",
+
+    "infra:destroy:uk": "cdk --app 'npx tsx infra/bin/app.ts' --output /tmp/omazifier-market.out destroy Omazifier-UK --force",
+    "infra:destroy:de": "cdk --app 'npx tsx infra/bin/app.ts' --output /tmp/omazifier-market.out destroy Omazifier-DE --force",
+    "infra:destroy:fr": "cdk --app 'npx tsx infra/bin/app.ts' --output /tmp/omazifier-market.out destroy Omazifier-FR --force",
+    "infra:destroy:all": "cdk --app 'npx tsx infra/bin/app.ts' --output /tmp/omazifier-market.out destroy --all --force",
+
+    "infra:reset": "npm run infra:destroy:all && npm run infra:shared:destroy",
+    "infra:status": "bash infra/scripts/status.sh"
   },
   "dependencies": {
     "next": "^15.1.6",
@@ -19,6 +45,12 @@
     "typescript": "^5.6.3",
     "@types/node": "^22.10.0",
     "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0"
+    "@types/react-dom": "^19.0.0",
+    "tsx": "^4.19.2",
+    "aws-cdk": "^2.253.0",
+    "aws-cdk-lib": "^2.253.0",
+    "constructs": "^10.6.0",
+    "cdk-nextjs-standalone": "^4.3.3",
+    "@opennextjs/aws": "4.0.0"
   }
 }

@@ -1,0 +1,8 @@
+omazifier/registry.pruned.ts
+.next
+.open-next
+dist
+node_modules
+cdk.out
+infra/shared/cdk.out
+cdk-shared-test.out

@@ -1,0 +1,20 @@
+{
+  "app": "npx tsx infra/bin/app.ts",
+  "watch": {
+    "include": [
+      "infra/**"
+    ],
+    "exclude": [
+      "cdk*.json",
+      "**/*.d.ts",
+      "node_modules",
+      "dist",
+      ".open-next"
+    ]
+  },
+  "context": {
+    "@aws-cdk/core:target-partitions": [
+      "aws"
+    ]
+  }
+}
